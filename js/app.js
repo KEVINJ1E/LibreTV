@@ -47,6 +47,12 @@ document.addEventListener('DOMContentLoaded', function() {
         yellowFilterToggle.checked = localStorage.getItem('yellowFilterEnabled') === 'true';
     }
     
+    // 设置广告过滤开关初始状态
+    const adFilterToggle = document.getElementById('adFilterToggle');
+    if (adFilterToggle) {
+        adFilterToggle.checked = localStorage.getItem(PLAYER_CONFIG.adFilteringStorage) !== 'false'; // 默认为true
+    }
+    
     // 设置事件监听器
     setupEventListeners();
 });
@@ -252,6 +258,14 @@ function setupEventListeners() {
             localStorage.setItem('yellowFilterEnabled', e.target.checked);
         });
     }
+    
+    // 新增：广告过滤开关事件绑定
+    const adFilterToggle = document.getElementById('adFilterToggle');
+    if (adFilterToggle) {
+        adFilterToggle.addEventListener('change', function(e) {
+            localStorage.setItem(PLAYER_CONFIG.adFilteringStorage, e.target.checked);
+        });
+    }
 }
 
 // 重置搜索区域
@@ -333,7 +347,7 @@ async function search() {
         const yellowFilterEnabled = localStorage.getItem('yellowFilterEnabled') === 'true';
         let results = data.list;
         if (yellowFilterEnabled) {
-            const banned = ['伦理片', '色情片','福利视频','福利片'];
+            const banned = ['伦理片', '色情片','同性片','福利视频','福利片'];
             results = results.filter(item => {
                 const typeName = item.type_name || '';
                 return !banned.some(keyword => typeName.includes(keyword));
