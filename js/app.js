@@ -176,7 +176,7 @@ function checkAdultAPIsSelected() {
         
         // 恢复原来的描述文字
         if (filterDescription) {
-            filterDescription.innerHTML = '过滤"伦理片"等黄色内容';
+            filterDescription.innerHTML = '过滤"伦理片"等涩涩内容';
         }
         
         // 移除提示信息
